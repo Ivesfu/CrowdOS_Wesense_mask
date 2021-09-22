@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据集分析信息web展示</title>
+    <script>
+        var json;
+		window.onload = function () {
+            var url = "tmp.json"
+            var request = new XMLHttpRequest();
+            request.open("get", url);
+            request.send(null);
+            request.onload = function () {
+                if (request.status == 200) {
+                    json = JSON.parse(request.responseText);
+                    for(var i=0;i<json.length;i++){
+                    	console.log(json[i].tot);
+                        console.log(json[i].info)
+                    }
+                }
+            }
+            var t=setTimeout("myfunc()",1000)
+       }
+       function myfunc(){
+           var x = document.getElementById("0");
+           console.log(json);
+           x.innerHTML = "机场场合数据集, 共识别了" + String(json[0].tot)+ "人, 没带口罩的比例：" + String(json[0].info);
+           var y = document.getElementById("1");
+           y.innerHTML = "火车站场合数据集, 共识别了" + String(json[1].tot)+ "人, 没带口罩的比例：" + String(json[1].info);
+           var z = document.getElementById("2");
+           z.innerHTML = "公园社区场合数据集, 共识别了" + String(json[2].tot)+ "人, 没带口罩的比例：" + String(json[2].info);
+       }
+	</script>
+</head>
+<body>
+    <p id = "0"></p>
+    <p id = "1"></p>
+    <p id = "2"></p>
+</body>
+</html>
